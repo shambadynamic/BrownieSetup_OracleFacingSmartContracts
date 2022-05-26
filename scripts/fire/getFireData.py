@@ -1,4 +1,4 @@
-from brownie import accounts, OracleFacingFireConsumer
+from brownie import OracleFacingFireConsumer, config, accounts
 
 def printFireData(fireConsumer, propertyId):
 
@@ -19,9 +19,8 @@ def printCids(fireConsumer):
         i += 1
 
 def main():
-    deployer_account = accounts.load('deployer_account')
+    deployer_account = accounts.add(config["wallets"]["from_key"]) or accounts[0]
     print(deployer_account.address)
-    fireConsumer = OracleFacingFireConsumer.at("0x627051FDC98e9436Ea0cB1F32C5DBE5Dd9b75D27")
-
+    fireConsumer = OracleFacingFireConsumer[-1]
     printFireData(fireConsumer, 2)
     printCids(fireConsumer)

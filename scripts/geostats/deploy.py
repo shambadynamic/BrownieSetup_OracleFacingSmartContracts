@@ -1,6 +1,6 @@
-from brownie import accounts, OracleFacingGeoConsumer
+from brownie import OracleFacingGeoConsumer, config, accounts
 def main():
-    deployer_account = accounts.load('deployer_account')
+    deployer_account = accounts.add(config["wallets"]["from_key"]) or accounts[0]
     print(deployer_account.address)
-    greeter = OracleFacingGeoConsumer.deploy({'from': deployer_account})
-    print("Deployed at: ", greeter.address)
+    contract = OracleFacingGeoConsumer.deploy({'from': deployer_account})
+    print("Deployed at: ", contract.address)

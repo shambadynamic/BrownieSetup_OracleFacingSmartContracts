@@ -1,4 +1,4 @@
-from brownie import accounts, MyLinkToken, OracleFacingGeoConsumer
+from brownie import MyLinkToken, OracleFacingGeoConsumer, config, accounts
 
 def sendRequest(geoConsumer, deployer_account):
 
@@ -9,8 +9,7 @@ def sendRequest(geoConsumer, deployer_account):
     
 
 def main():
-    deployer_account = accounts.load('deployer_account')
+    deployer_account = accounts.add(config["wallets"]["from_key"]) or accounts[0]
     print(deployer_account.address)
-    geoConsumer = OracleFacingGeoConsumer.at("0x7F61c4d2bCCEfd3F33d8864616aA6363F4E44C57")
-
+    geoConsumer = OracleFacingGeoConsumer[-1]
     sendRequest(geoConsumer, deployer_account)

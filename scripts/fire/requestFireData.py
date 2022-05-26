@@ -1,4 +1,4 @@
-from brownie import accounts, MyLinkToken, OracleFacingFireConsumer
+from brownie import MyLinkToken, OracleFacingFireConsumer, config, accounts
 
 def sendRequest(fireConsumer, deployer_account):
     
@@ -9,8 +9,7 @@ def sendRequest(fireConsumer, deployer_account):
     
 
 def main():
-    deployer_account = accounts.load('deployer_account')
+    deployer_account = accounts.add(config["wallets"]["from_key"]) or accounts[0]
     print(deployer_account.address)
-    fireConsumer = OracleFacingFireConsumer.at("0x627051FDC98e9436Ea0cB1F32C5DBE5Dd9b75D27")
-
+    fireConsumer = OracleFacingFireConsumer[-1]
     sendRequest(fireConsumer, deployer_account)

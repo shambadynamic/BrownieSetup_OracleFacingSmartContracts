@@ -1,4 +1,4 @@
-from brownie import accounts, OracleFacingGeoConsumer
+from brownie import OracleFacingGeoConsumer, config, accounts
 
 def printGeoData(geoConsumer):
 
@@ -19,9 +19,8 @@ def printCids(geoConsumer):
         i += 1
 
 def main():
-    deployer_account = accounts.load('deployer_account')
+    deployer_account = accounts.add(config["wallets"]["from_key"]) or accounts[0]
     print(deployer_account.address)
-    geoConsumer = OracleFacingGeoConsumer.at("0x7F61c4d2bCCEfd3F33d8864616aA6363F4E44C57")
-
+    geoConsumer = OracleFacingGeoConsumer[-1]
     printGeoData(geoConsumer)
     printCids(geoConsumer)

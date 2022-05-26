@@ -9,3 +9,6 @@ compiler:
       - '@shamba=shambadynamic/Shamba-smartcontractkit@1.0.0'
       - '@chainlink=smartcontractkit/chainlink@1.4.1'
       - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.6.0'
+dotenv: .env
+wallets:
+  from_key: ${PRIVATE_KEY}
